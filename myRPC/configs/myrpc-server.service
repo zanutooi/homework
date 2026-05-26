@@ -1,0 +1,16 @@
+[Unit]
+Description=myRPC Server Daemon
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/myrpc-server --daemon
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=myrpc-server
+
+[Install]
+WantedBy=multi-user.target
